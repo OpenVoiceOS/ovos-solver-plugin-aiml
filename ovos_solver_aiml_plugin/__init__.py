@@ -94,7 +94,7 @@ class AimlBot:
 
 class AIMLSolver(AbstractSolver):
     def __init__(self):
-        super().__init__(name="AIML", priority=95)
+        super().__init__(name="AIML", priority=95, enable_cache=False, enable_tx=True)
         self.brain = AimlBot()
         self.brain.load_brain()
 
