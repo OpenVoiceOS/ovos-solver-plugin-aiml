@@ -41,7 +41,7 @@ setup(
     packages=['ovos_solver_aiml_plugin'],
     zip_safe=True,
     keywords='mycroft plugin utterance fallback query',
-    entry_points={'ovos.plugin.solver': PLUGIN_ENTRY_POINT},
+    entry_points={'neon.plugin.solver': PLUGIN_ENTRY_POINT},
     install_requires=required("requirements.txt"),
     long_description=long_description,
     long_description_content_type='text/markdown'
