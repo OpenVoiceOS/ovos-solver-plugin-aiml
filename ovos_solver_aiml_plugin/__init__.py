@@ -3,27 +3,33 @@ import random
 import time
 from datetime import date
 from os import listdir, remove as remove_file, makedirs
-from os.path import dirname, isfile
+from os.path import dirname, isfile, isdir
 
 from neon_solvers import AbstractSolver
 from ovos_utils.log import LOG
 from ovos_utils.xdg_utils import xdg_data_home
 
-# patch so en-us works with python > 3.7
+# patch so aiml works with python > 3.7
 time.clock = time.perf_counter
 import aiml
 
 
 class AimlBot:
+    XDG_PATH = f"{xdg_data_home()}/aiml"
+    makedirs(XDG_PATH, exist_ok=True)
 
     def __init__(self, lang="en-us", settings=None):
         self.settings = settings or {}
         self.lang = lang
         self.kernel = aiml.Kernel()
-        xdg_aiml = os.path.join(xdg_data_home(), "aiml", lang)
-        makedirs(xdg_aiml, exist_ok=True)
-        self.aiml_path = os.path.join(dirname(__file__), "aiml", lang)
-        self.brain_path = os.path.join(xdg_aiml, "bot_brain.brn")
+        xdg_lang = f"{self.XDG_PATH}/{lang}"
+        if isdir(xdg_lang):
+            # user defined aiml
+            self.aiml_path = xdg_lang
+        else:
+            # bundled curated aiml
+            self.aiml_path = f"{dirname(__file__)}/aiml/{lang}"
+        self.brain_path = f"{self.XDG_PATH}/{lang}/bot_brain.brn"
         self.line_count = 1
         self.save_loop_threshold = int(self.settings.get('save_loop_threshold', 4))
         self.brain_loaded = False
@@ -81,9 +87,6 @@ class AimlBot:
             self.load_brain()
         answer = self.ask_brain(utterance)
         if answer != "":
-            asked_question = False
-            if answer.endswith("?"):
-                asked_question = True
             return answer
 
     def shutdown(self):
@@ -94,14 +97,18 @@ class AimlBot:
 
 class AIMLSolver(AbstractSolver):
     def __init__(self, config=None):
+        config = config or {"lang": "en-us"}
+        lang = config.get("lang") or "en-us"
+        if lang != "en-us" and lang not in os.listdir(AimlBot.XDG_PATH):
+            config["lang"] = lang = "en-us"
         super().__init__(name="AIML", priority=95, config=config,
                          enable_cache=False, enable_tx=True)
-        self.brain = AimlBot()
+        self.brain = AimlBot(lang)
         self.brain.load_brain()
 
     # officially exported Solver methods
     def get_spoken_answer(self, query, context=None):
-        return self.brain.ask_brain(query)
+        return self.brain.ask(query)
 
 
 if __name__ == "__main__":
