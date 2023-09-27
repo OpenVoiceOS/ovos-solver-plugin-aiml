@@ -1,2 +1,2 @@
 aiml
-neon_solvers
+ovos-plugin-manager

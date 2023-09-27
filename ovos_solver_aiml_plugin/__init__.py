@@ -1,11 +1,10 @@
 import os
-import random
 import time
 from datetime import date
 from os import listdir, remove as remove_file, makedirs
 from os.path import dirname, isfile, isdir
 
-from neon_solvers import AbstractSolver
+from ovos_plugin_manager.templates.solvers import QuestionSolver
 from ovos_utils.log import LOG
 from ovos_utils.xdg_utils import xdg_data_home
 
@@ -28,8 +27,9 @@ class AimlBot:
             self.aiml_path = xdg_lang
         else:
             # bundled curated aiml
-            self.aiml_path = f"{dirname(__file__)}/aiml/{lang}"
+            self.aiml_path = f"{dirname(__file__)}/aiml_data/{lang}"
         self.brain_path = f"{self.XDG_PATH}/{lang}/bot_brain.brn"
+        makedirs(f"{self.XDG_PATH}/{lang}", exist_ok=True)
         self.line_count = 1
         self.save_loop_threshold = int(self.settings.get('save_loop_threshold', 4))
         self.brain_loaded = False
@@ -63,7 +63,6 @@ class AimlBot:
     def reset_brain(self):
         LOG.debug('Deleting brain file')
         # delete the brain file and reset memory
-        self.speak_dialog("reset.memory")
         remove_file(self.brain_path)
         self.soft_reset_brain()
         return
@@ -95,14 +94,16 @@ class AimlBot:
             self.kernel.resetBrain()  # Manual remove
 
 
-class AIMLSolver(AbstractSolver):
+class AIMLSolver(QuestionSolver):
+    enable_tx = True
+    priority = 95
+
     def __init__(self, config=None):
         config = config or {"lang": "en-us"}
         lang = config.get("lang") or "en-us"
         if lang != "en-us" and lang not in os.listdir(AimlBot.XDG_PATH):
             config["lang"] = lang = "en-us"
-        super().__init__(name="AIML", priority=95, config=config,
-                         enable_cache=False, enable_tx=True)
+        super().__init__(config)
         self.brain = AimlBot(lang)
         self.brain.load_brain()
 
@@ -115,5 +116,3 @@ if __name__ == "__main__":
     bot = AIMLSolver()
     print(bot.spoken_answer("hello!"))
     print(bot.spoken_answer("Olá!", {"lang": "pt-pt"}))
-
-
