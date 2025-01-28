@@ -3,7 +3,7 @@ import time
 from datetime import date
 from os import listdir, remove as remove_file, makedirs
 from os.path import dirname, isfile, isdir
-
+from typing import Optional
 from ovos_plugin_manager.templates.solvers import QuestionSolver
 from ovos_utils.log import LOG
 from ovos_utils.xdg_utils import xdg_data_home
@@ -95,24 +95,33 @@ class AimlBot:
 
 
 class AIMLSolver(QuestionSolver):
-    enable_tx = True
-    priority = 95
-
     def __init__(self, config=None):
         config = config or {"lang": "en-us"}
         lang = config.get("lang") or "en-us"
         if lang != "en-us" and lang not in os.listdir(AimlBot.XDG_PATH):
             config["lang"] = lang = "en-us"
-        super().__init__(config)
+        super().__init__(config, internal_lang=lang, enable_tx=True, priority = 95)
         self.brain = AimlBot(lang)
         self.brain.load_brain()
 
-    # officially exported Solver methods
-    def get_spoken_answer(self, query, context=None):
+    def get_spoken_answer(self, query: str,
+                          lang: Optional[str] = None,
+                          units: Optional[str] = None) -> Optional[str]:
+        """
+        Obtain the spoken answer for a given query.
+
+        Args:
+            query (str): The query text.
+            lang (Optional[str]): Optional language code. Defaults to None.
+            units (Optional[str]): Optional units for the query. Defaults to None.
+
+        Returns:
+            str: The spoken answer as a text response.
+        """
         return self.brain.ask(query)
 
 
 if __name__ == "__main__":
     bot = AIMLSolver()
     print(bot.spoken_answer("hello!"))
-    print(bot.spoken_answer("Olá!", {"lang": "pt-pt"}))
+    print(bot.spoken_answer("Olá!", lang= "pt-pt"))
