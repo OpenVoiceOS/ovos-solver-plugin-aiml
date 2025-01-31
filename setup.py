@@ -16,23 +16,37 @@ def required(requirements_file):
                 if pkg.strip() and not pkg.startswith("#")]
 
 
-with open("README.md", "r") as f:
+with open(f"{BASEDIR}/README.md", "r") as f:
     long_description = f.read()
 
+def get_version():
+    """ Find the version of the package"""
+    version_file = os.path.join(BASEDIR, 'ovos_solver_aiml_plugin', 'version.py')
+    major, minor, build, alpha = (None, None, None, None)
+    with open(version_file) as f:
+        for line in f:
+            if 'VERSION_MAJOR' in line:
+                major = line.split('=')[1].strip()
+            elif 'VERSION_MINOR' in line:
+                minor = line.split('=')[1].strip()
+            elif 'VERSION_BUILD' in line:
+                build = line.split('=')[1].strip()
+            elif 'VERSION_ALPHA' in line:
+                alpha = line.split('=')[1].strip()
 
-with open("./version.py", "r", encoding="utf-8") as v:
-    for line in v.readlines():
-        if line.startswith("__version__"):
-            if '"' in line:
-                version = line.split('"')[1]
-            else:
-                version = line.split("'")[1]
+            if ((major and minor and build and alpha) or
+                    '# END_VERSION_BLOCK' in line):
+                break
+    version = f"{major}.{minor}.{build}"
+    if alpha and int(alpha) > 0:
+        version += f"a{alpha}"
+    return version
 
 
 PLUGIN_ENTRY_POINT = 'ovos-solver-aiml-plugin=ovos_solver_aiml_plugin:AIMLSolver'
 setup(
     name='ovos-solver-aiml-plugin',
-    version=version,
+    version=get_version(),
     description='A question solver plugin for ovos/neon/mycroft',
     url='https://github.com/OpenVoiceOS/ovos-solver-aiml-plugin',
     author='jarbasai',

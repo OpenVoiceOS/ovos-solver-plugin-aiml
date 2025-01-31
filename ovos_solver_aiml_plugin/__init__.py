@@ -122,6 +122,8 @@ class AIMLSolver(QuestionSolver):
 
 
 if __name__ == "__main__":
+    print(AimlBot.XDG_PATH)
+
     bot = AIMLSolver()
     print(bot.spoken_answer("hello!"))
-    print(bot.spoken_answer("Olá!", lang= "pt-pt"))
+    print(bot.spoken_answer("Qual é a tua comida favorita?", lang="pt-pt"))
