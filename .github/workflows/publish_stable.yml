@@ -10,7 +10,7 @@ jobs:
     secrets: inherit
     with:
       branch: 'master'
-      version_file: 'ovos-solver-plugin-aiml/version.py'
+      version_file: 'ovos_solver_aiml_plugin/version.py'
       setup_py: 'setup.py'
       publish_release: true
 
