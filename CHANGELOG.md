@@ -1,8 +1,12 @@
 # Changelog
 
-## [V0.0.0](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/V0.0.0) (2023-03-25)
+## [0.0.1a1](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.1a1) (2025-06-08)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/c7c0a4be6a45b8e8257d153572770ea9d45d63d7...V0.0.0)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.0...0.0.1a1)
+
+**Merged pull requests:**
+
+- fix: compatibility with ovos-plugin-manager 1.X.X [\#1](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/1) ([JarbasAl](https://github.com/JarbasAl))
 
 
 
