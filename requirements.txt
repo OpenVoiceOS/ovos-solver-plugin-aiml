@@ -1,2 +1,2 @@
 aiml
-ovos-plugin-manager
+ovos-plugin-manager>=0.0.26,<2.0.0
