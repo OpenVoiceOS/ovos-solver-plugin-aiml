@@ -1,12 +1,24 @@
 # Changelog
 
-## [0.0.1a1](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.1a1) (2025-06-08)
+## [0.0.2a2](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a2) (2025-12-18)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.0...0.0.1a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a1...0.0.2a2)
 
 **Merged pull requests:**
 
-- fix: compatibility with ovos-plugin-manager 1.X.X [\#1](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/1) ([JarbasAl](https://github.com/JarbasAl))
+- chore: Configure Renovate [\#5](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/5) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [0.0.2a1](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a1) (2025-11-22)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/V0.0.1...0.0.2a1)
+
+**Merged pull requests:**
+
+- Update requirements.txt [\#3](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/3) ([JarbasAl](https://github.com/JarbasAl))
+
+## [V0.0.1](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/V0.0.1) (2025-06-08)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.1...V0.0.1)
 
 
 
