@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a4](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a4) (2025-12-19)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a3...0.0.2a4)
+
+**Merged pull requests:**
+
+- chore\(deps\): update actions/setup-python action to v6 [\#11](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/11) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [0.0.2a3](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a3) (2025-12-19)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a2...0.0.2a3)
