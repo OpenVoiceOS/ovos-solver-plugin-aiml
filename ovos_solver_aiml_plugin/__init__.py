@@ -3,8 +3,9 @@ import time
 from datetime import date
 from os import listdir, remove as remove_file, makedirs
 from os.path import dirname, isfile, isdir
-from typing import Optional
-from ovos_plugin_manager.templates.solvers import QuestionSolver
+from typing import Dict, Optional, List, Any, Tuple
+
+from ovos_plugin_manager.templates.agents import RetrievalEngine
 from ovos_utils.log import LOG
 from ovos_utils.xdg_utils import xdg_data_home
 
@@ -94,31 +95,29 @@ class AimlBot:
             self.kernel.resetBrain()  # Manual remove
 
 
-class AIMLSolver(QuestionSolver):
-    def __init__(self, config=None):
+class AIMLSolver(RetrievalEngine):
+    def __init__(self, config: Optional[Dict[str, Any]] = None):
         config = config or {"lang": "en-us"}
         lang = config.get("lang") or "en-us"
         if lang != "en-us" and lang not in os.listdir(AimlBot.XDG_PATH):
-            config["lang"] = lang = "en-us"
-        super().__init__(config, internal_lang=lang, enable_tx=True, priority = 95)
-        self.brain = AimlBot(lang)
+            config["lang"] = "en-us"
+        super().__init__(config)
+        self.brain = AimlBot(self.config.get("lang"))
         self.brain.load_brain()
 
-    def get_spoken_answer(self, query: str,
-                          lang: Optional[str] = None,
-                          units: Optional[str] = None) -> Optional[str]:
+    def query(self, query: str, lang: Optional[str] = None, k: int = 3) -> List[Tuple[str, float]]:
         """
-        Obtain the spoken answer for a given query.
+        Searches the knowledge base for relevant documents or data.
 
         Args:
-            query (str): The query text.
-            lang (Optional[str]): Optional language code. Defaults to None.
-            units (Optional[str]): Optional units for the query. Defaults to None.
+            query: The search string.
+            lang: BCP-47 language code.
+            k: The maximum number of results to return.
 
         Returns:
-            str: The spoken answer as a text response.
+            List of tuples (content, score) for the top k matches.
         """
-        return self.brain.ask(query)
+        return [(self.brain.ask(query), 0.5)]
 
 
 if __name__ == "__main__":

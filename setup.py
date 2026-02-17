@@ -47,15 +47,15 @@ PLUGIN_ENTRY_POINT = 'ovos-solver-aiml-plugin=ovos_solver_aiml_plugin:AIMLSolver
 setup(
     name='ovos-solver-aiml-plugin',
     version=get_version(),
-    description='A question solver plugin for ovos/neon/mycroft',
+    description='A chatbot plugin for OpenVoiceOS',
     url='https://github.com/OpenVoiceOS/ovos-solver-aiml-plugin',
     author='jarbasai',
     author_email='jarbasai@mailfence.com',
     license='MIT',
     packages=['ovos_solver_aiml_plugin'],
     zip_safe=True,
-    keywords='mycroft plugin utterance fallback query',
-    entry_points={'neon.plugin.solver': PLUGIN_ENTRY_POINT},
+    keywords='OpenVoiceOS OVOS plugin utterance fallback query',
+    entry_points={'opm.agents.retrieval': PLUGIN_ENTRY_POINT},
     install_requires=required("requirements.txt"),
     long_description=long_description,
     long_description_content_type='text/markdown'
