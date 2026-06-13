@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ovos-solver-aiml-plugin"
+dynamic = ["readme"]
+description = "A question solver plugin for ovos/neon/mycroft"
+authors = [{ name = "JarbasAi", email = "jarbasai@mailfence.com" }]
+license = { text = "MIT" }
+requires-python = ">=3.9"
+keywords = ["mycroft", "plugin", "utterance", "fallback", "query", "aiml"]
+
+[project.urls]
+Homepage = "https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml"
+
+dependencies = [
+    "aiml",
+    "ovos-plugin-manager>=0.0.26,<3.0.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "ovoscope",
+    "ovos-persona",
+]
+
+[project.entry-points."neon.plugin.solver"]
+"ovos-solver-aiml-plugin" = "ovos_solver_aiml_plugin:AIMLSolver"
+
+[tool.setuptools]
+packages = ["ovos_solver_aiml_plugin"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+ovos_solver_aiml_plugin = ["aiml_data/**"]
+
+[tool.setuptools.dynamic]
+readme = { file = "README.md", content-type = "text/markdown" }
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
