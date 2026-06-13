@@ -11,13 +11,13 @@ license = { text = "MIT" }
 requires-python = ">=3.9"
 keywords = ["mycroft", "plugin", "utterance", "fallback", "query", "aiml"]
 
-[project.urls]
-Homepage = "https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml"
-
 dependencies = [
     "aiml",
     "ovos-plugin-manager>=0.0.26,<3.0.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml"
 
 [project.optional-dependencies]
 test = [
