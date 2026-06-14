@@ -1,0 +1,54 @@
+name: Regenerate AIML Brain
+
+# Runs after any push to dev (i.e. after a PR merges) and on demand.
+#
+# Safety notes:
+#   - The release workflow fires on pull_request[closed]→dev, NOT on push→dev,
+#     so this workflow committing back to dev cannot trigger a release loop.
+#   - The "no changes" early exit makes this idempotent: a second run produces
+#     no diff and exits 0 without committing, preventing any push loop.
+
+on:
+  push:
+    branches: [dev]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Regenerate AIML brain files from locale
+        run: |
+          for lang_dir in ovos_solver_aiml_plugin/locale/*/; do
+            lang=$(basename "$lang_dir")
+            out_dir="ovos_solver_aiml_plugin/aiml_data/${lang}"
+            mkdir -p "$out_dir"
+            echo "Regenerating brain for ${lang} -> ${out_dir}/generated.aiml"
+            python scripts/locale_to_brain.py aiml "$lang_dir" "${out_dir}/generated.aiml"
+          done
+
+      - name: Commit regenerated brain if changed
+        run: |
+          if git diff --quiet -- ovos_solver_aiml_plugin/aiml_data/; then
+            echo "No brain changes — nothing to commit."
+            exit 0
+          fi
+          git config user.name "JarbasAi"
+          git config user.email "jarbasai@mailfence.com"
+          git add ovos_solver_aiml_plugin/aiml_data/
+          git commit -m "chore: regenerate AIML brain from locale"
+          git push

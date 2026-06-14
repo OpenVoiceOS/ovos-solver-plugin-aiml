@@ -1,0 +1,1 @@
+Cased-Based Reasoning is another name for "nearest-neighbor" classification. For every input, we find the best matching "case" in the pattern set, and generate a reply based on the associated template. CBR

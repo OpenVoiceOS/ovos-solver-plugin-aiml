@@ -1,0 +1,1 @@
+Anonymous inner classes often appear as arguments to Event handlers, for example a routine that handles a button press. The inner class implements a given interface for the handler. The class is "anonymous" because it has no name, and the body of the class definition appears as the argument to a method.

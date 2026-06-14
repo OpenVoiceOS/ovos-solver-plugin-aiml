@@ -61,3 +61,30 @@ load time (not just on first use), so local model-based plugins carry their
 full model-load cost each time the engine is created.  A remote translate
 plugin such as `ovos-translate-plugin-server` is recommended so that the cost
 is paid only when translation is actually needed.
+
+## Contributing intents (OVOS locale)
+
+Conversation content lives in `ovos_solver_aiml_plugin/locale/<lang>/` as
+paired `.intent` / `.dialog` files — one file per conversational exchange.
+This is the source of truth; the AIML brain is regenerated from it automatically
+on every merge to `dev`.
+
+To add or edit responses you only need to touch `locale/` — no AIML knowledge
+required.
+
+```
+locale/en-us/
+├── hello.intent      # trigger utterances (one per line)
+├── hello.dialog      # bot responses (one per line, picked at random)
+├── favorite_color.intent
+└── favorite_color.dialog
+```
+
+Full contributor guides:
+
+- **[docs/locale.md](docs/locale.md)** — locale format, `{query}` slots, adding
+  intents, translating, the regenerate-on-merge CI flow, and what the converter
+  supports vs. skips.
+- **[docs/converters.md](docs/converters.md)** — usage of `brain_to_locale.py`
+  and `locale_to_brain.py`, examples, the round-trip, and the ~42 % conversion
+  rate caveat.
