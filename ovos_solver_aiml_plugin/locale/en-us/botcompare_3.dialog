@@ -1,1 +1,0 @@
-BOTCOMPARE failed as too many items were passed to compare. Usage: BOTCOMPARE<get name="xxxxx"/><get name="yyyyy"/> Replace xxxxx and yyyyy with your own variables. FAIL

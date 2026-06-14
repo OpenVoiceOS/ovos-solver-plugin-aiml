@@ -13,7 +13,7 @@ keywords = ["mycroft", "plugin", "utterance", "fallback", "query", "aiml"]
 
 dependencies = [
     "aiml",
-    "ovos-plugin-manager>=0.0.26,<3.0.0",
+    "ovos-plugin-manager>=2.6.1a1,<3.0.0",
 ]
 
 [project.urls]

@@ -1,1 +1,0 @@
-BOTCOMPARE failed as nothing was passed to compare. Usgae: BOTCOMPARE<get name="xxxxx"/><get name="yyyyy"/> Replace xxxxx and yyyyy with your own variables. FAIL

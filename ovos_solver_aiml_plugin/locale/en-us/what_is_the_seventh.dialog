@@ -1,1 +1,0 @@
-Thou shalt not commit adultery.

@@ -2,11 +2,11 @@
 
 Proves:
   1. An utterance flows through the real OVOS intent pipeline, hits the persona
-     pipeline plugin backed by AIMLSolver, and produces a ``speak`` message.
+     pipeline plugin backed by the AIML engine, and produces a ``speak`` message.
   2. Per-session memory is recorded: the live PersonaService accumulates USER +
      ASSISTANT turns keyed by session_id, and an unknown session has no history.
 
-No network access, no downloads.  AIMLSolver uses bundled AIML brain files —
+No network access, no downloads.  The AIML engine uses bundled AIML brain files —
 ``hello`` reliably returns ``Hi there!`` from the en-us corpus.
 """
 import json
@@ -123,7 +123,7 @@ def _drive_utterance(croft, sess: Session, utterance: str, timeout: int = 60):
 
 class TestAimlPersonaSpeaksThroughPipeline:
     """The utterance must traverse the full OVOS intent pipeline, be handled by
-    AIMLSolver (pattern-matching, no network), and produce a non-empty speak message."""
+    the AIML engine (pattern-matching, no network), and produce a non-empty speak message."""
 
     def test_pipeline_produces_speak(self, mc):
         sess = Session(session_id="aiml-e2e-speak-test")
@@ -143,12 +143,15 @@ class TestAimlPersonaSpeaksThroughPipeline:
         )
 
     def test_aiml_answers_locally_without_network(self, mc):
-        """Verify AIMLSolver returns a non-empty answer for 'hello' using the bundled brain."""
-        from ovos_solver_aiml_plugin import AIMLSolver
-        solver = AIMLSolver({"lang": "en-us"})
-        answer = solver.get_spoken_answer(TEST_UTTERANCE)
-        assert answer and answer.strip(), (
-            f"AIMLSolver returned empty answer for '{TEST_UTTERANCE}'"
+        """Verify the AIML engine returns a non-empty answer for 'hello' using the bundled brain."""
+        from ovos_solver_aiml_plugin import AIMLChatEngine
+        from ovos_plugin_manager.templates.agents import AgentMessage, MessageRole
+        engine = AIMLChatEngine({"lang": "en-us"})
+        reply = engine.continue_chat(
+            [AgentMessage(role=MessageRole.USER, content=TEST_UTTERANCE)]
+        )
+        assert reply.content and reply.content.strip(), (
+            f"AIMLChatEngine returned empty answer for '{TEST_UTTERANCE}'"
         )
 
     def test_speak_non_empty_for_secondary_utterance(self, mc):

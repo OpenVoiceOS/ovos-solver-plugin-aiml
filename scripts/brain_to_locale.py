@@ -25,6 +25,15 @@ import xml.etree.ElementTree as ET
 _AIML_COMPLEX = ("<srai", "<random", "<condition", "<star", "<get", "<that", "<topic")
 _RIVE_COMPLEX = ("<call>", "@", "{topic}", "<input", "<reply", "(@")
 
+# any residual angle-bracket markup in the extracted text (e.g. escaped
+# <get/>/<category> tags inside explanatory templates that itertext un-escapes)
+_MARKUP = re.compile(r"<[^>]*>")
+
+
+def _has_markup(text):
+    """True if text still carries <…> markup that must not leak into an export."""
+    return bool(_MARKUP.search(text))
+
 
 def _slug(text, used):
     """A unique, filesystem-safe base name derived from the trigger text."""
@@ -77,6 +86,11 @@ def convert_aiml(src_dir, out_dir):
             # template text = visible text only (drops <bot/>, <think/>, <set/>…)
             response = re.sub(r"\s+", " ", "".join(tpl_el.itertext())).strip()
             if not pattern or not response:
+                skipped += 1
+                continue
+            # never emit an export with residual markup (escaped tags un-escape
+            # via itertext into literal <…> text)
+            if _has_markup(pattern) or _has_markup(response):
                 skipped += 1
                 continue
             utt = _pattern_to_intent(pattern)
