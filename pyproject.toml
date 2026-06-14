@@ -23,7 +23,7 @@ Homepage = "https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml"
 test = [
     "pytest",
     "ovoscope",
-    "ovos-persona @ git+https://github.com/OpenVoiceOS/ovos-persona@dev",
+    "ovos-persona>=0.9.0a1",
 ]
 
 [project.entry-points."neon.plugin.solver"]
