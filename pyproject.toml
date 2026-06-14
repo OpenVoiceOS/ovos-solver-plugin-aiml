@@ -26,8 +26,8 @@ test = [
     "ovos-persona>=0.9.0a1",
 ]
 
-[project.entry-points."neon.plugin.solver"]
-"ovos-solver-aiml-plugin" = "ovos_solver_aiml_plugin:AIMLSolver"
+[project.entry-points."opm.agents.chat"]
+"ovos-solver-aiml-plugin" = "ovos_solver_aiml_plugin:AIMLChatEngine"
 
 [tool.setuptools]
 packages = ["ovos_solver_aiml_plugin"]

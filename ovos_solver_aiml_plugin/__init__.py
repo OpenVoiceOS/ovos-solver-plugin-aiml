@@ -3,8 +3,8 @@ import time
 from datetime import date
 from os import listdir, remove as remove_file, makedirs
 from os.path import dirname, isfile, isdir
-from typing import Optional
-from ovos_plugin_manager.templates.solvers import QuestionSolver
+from typing import List, Optional
+from ovos_plugin_manager.templates.agents import ChatEngine, AgentMessage, MessageRole
 from ovos_utils.log import LOG
 from ovos_utils.xdg_utils import xdg_data_home
 
@@ -94,36 +94,39 @@ class AimlBot:
             self.kernel.resetBrain()  # Manual remove
 
 
-class AIMLSolver(QuestionSolver):
+class AIMLChatEngine(ChatEngine):
     def __init__(self, config=None):
         config = config or {"lang": "en-us"}
         lang = config.get("lang") or "en-us"
         if lang != "en-us" and lang not in os.listdir(AimlBot.XDG_PATH):
             config["lang"] = lang = "en-us"
-        super().__init__(config, internal_lang=lang, enable_tx=True, priority = 95)
+        super().__init__(config)
         self.brain = AimlBot(lang)
         self.brain.load_brain()
 
-    def get_spoken_answer(self, query: str,
-                          lang: Optional[str] = None,
-                          units: Optional[str] = None) -> Optional[str]:
-        """
-        Obtain the spoken answer for a given query.
+    def continue_chat(self, messages: List[AgentMessage],
+                      session_id: str = "default",
+                      lang: Optional[str] = None,
+                      units: Optional[str] = None) -> AgentMessage:
+        """Answer the latest user message via the AIML brain.
 
         Args:
-            query (str): The query text.
-            lang (Optional[str]): Optional language code. Defaults to None.
-            units (Optional[str]): Optional units for the query. Defaults to None.
+            messages: Conversation history; the last user turn is answered.
+            session_id: Session identifier (AIML keeps no per-session state here).
+            lang: Optional BCP-47 language code.
+            units: Optional unit system (unused).
 
         Returns:
-            str: The spoken answer as a text response.
+            AgentMessage: The assistant reply.
         """
-        return self.brain.ask(query)
+        query = next((m.content for m in reversed(messages)
+                      if m.role == MessageRole.USER), "")
+        answer = self.brain.ask(query) if query else ""
+        return AgentMessage(role=MessageRole.ASSISTANT, content=answer)
+
 
 
 if __name__ == "__main__":
     print(AimlBot.XDG_PATH)
-
-    bot = AIMLSolver()
-    print(bot.spoken_answer("hello!"))
-    print(bot.spoken_answer("Qual é a tua comida favorita?", lang="pt-pt"))
+    bot = AIMLChatEngine()
+    print(bot.continue_chat([AgentMessage(role=MessageRole.USER, content="hello!")]).content)
