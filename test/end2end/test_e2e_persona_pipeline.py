@@ -15,8 +15,8 @@ import tempfile
 
 import pytest
 
-ovoscope = pytest.importorskip("ovoscope")
-pytest.importorskip("ovos_persona")
+import ovoscope
+import ovos_persona
 
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session, SessionManager
@@ -28,8 +28,9 @@ from ovoscope import (
     is_pipeline_available,
 )
 
-if not is_pipeline_available(PERSONA_PIPELINE):
-    pytest.skip("ovos-persona-pipeline-plugin not installed", allow_module_level=True)
+assert is_pipeline_available(PERSONA_PIPELINE), (
+    "ovos-persona-pipeline-plugin must be installed (ships with ovos-persona)"
+)
 
 # ---------------------------------------------------------------------------
 # Constants
