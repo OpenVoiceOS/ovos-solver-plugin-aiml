@@ -21,9 +21,10 @@ Homepage = "https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml"
 
 [project.optional-dependencies]
 test = [
-    "pytest",
-    "ovoscope",
-    "ovos-persona>=0.9.0a1",
+    "pytest>=7.0.0",
+    "pytest-timeout>=2.0.0",
+    "ovoscope>=0.13.1",
+    "ovos-persona>=0.9.0a3",
 ]
 
 [project.entry-points."opm.agents.chat"]
