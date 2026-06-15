@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a5](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a5) (2026-06-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a4...0.0.2a5)
+
+**Merged pull requests:**
+
+- test: full-pipeline persona e2e \(real local AIML\) [\#14](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/14) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.0.2a4](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a4) (2025-12-19)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a3...0.0.2a4)
