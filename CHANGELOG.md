@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a6](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a6) (2026-08-01)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a5...0.0.2a6)
+
+**Merged pull requests:**
+
+- docs: rewrite README in Simplified Technical English [\#17](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/17) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.0.2a5](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a5) (2026-06-15)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a4...0.0.2a5)
