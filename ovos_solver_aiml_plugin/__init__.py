@@ -6,6 +6,11 @@ from os.path import dirname, isfile, isdir, join
 from typing import List, Optional
 
 from ovos_plugin_manager.templates.agents import ChatEngine, AgentMessage, MessageRole
+
+try:
+    from ovos_plugin_manager.templates.agents import ToolsArg
+except ImportError:  # pragma: no cover - older ovos-plugin-manager
+    ToolsArg = None
 from ovos_utils.log import LOG
 from ovos_utils.xdg_utils import xdg_data_home
 
@@ -210,12 +215,18 @@ class AIMLChatEngine(ChatEngine):
     def continue_chat(self, messages: List[AgentMessage],
                       session_id: str = "default",
                       lang: Optional[str] = None,
-                      units: Optional[str] = None) -> AgentMessage:
+                      units: Optional[str] = None,
+                      tools: "ToolsArg" = None) -> AgentMessage:
         """Answer the latest user message via the AIML brain.
 
         The user query is translated into the brain language, answered, and the
         answer translated back (both no-ops unless ``enable_tx`` is set and the
         language differs from the brain language).
+
+        ``tools`` is accepted for ``ChatEngine`` contract conformance and
+        ignored: AIML is pure pattern matching and cannot invoke tools. The
+        agentic-loop ReAct fallback depends on non-tool engines being callable
+        with ``tools=``.
         """
         query = next((m.content for m in reversed(messages)
                       if m.role == MessageRole.USER), "")
