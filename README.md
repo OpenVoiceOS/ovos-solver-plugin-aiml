@@ -78,6 +78,41 @@ so on) are skipped, and exports never emit residual `<…>` markup. See
 - [OpenVoiceOS/ovos-plugin-manager](https://github.com/OpenVoiceOS/ovos-plugin-manager): loads this plugin through the `opm.agents.chat` entry point.
 - [OpenVoiceOS/ovos-translate-plugin-server](https://github.com/OpenVoiceOS/ovos-translate-plugin-server): recommended remote translate plugin for `enable_tx`.
 
+## Docker
+
+This repo publishes `ghcr.io/openvoiceos/ovos-solver-plugin-aiml`, a
+standalone `ovos-persona-server` that serves one persona, `AimlBot`, backed
+by the `AIMLChatEngine` in this plugin. Matching runs entirely offline
+against the bundled `aiml_data`, so the image needs no key and no network
+access to answer.
+
+```bash
+docker run -p 8391:8337 ghcr.io/openvoiceos/ovos-solver-plugin-aiml:dev
+```
+
+```bash
+curl http://localhost:8391/v1/models
+curl http://localhost:8391/v1/chat/completions \
+    -H "Content-Type: application/json" \
+    -d '{"model": "AimlBot", "messages": [{"role": "user", "content": "hello"}]}'
+```
+
+A compose snippet:
+
+```yaml
+services:
+  ovos-aiml-persona:
+    image: ghcr.io/openvoiceos/ovos-solver-plugin-aiml:dev
+    ports:
+      - "8391:8337"
+    restart: unless-stopped
+```
+
+The image builds on every pull request touching `Dockerfile`,
+`.dockerignore`, `pyproject.toml`, or the docker workflow itself (build only,
+no push), and publishes on pushes to `master` (`latest`), `dev` (`dev`), and
+version tags. See the [`docker` workflow](.github/workflows/docker.yml).
+
 ## License
 
 [Apache License 2.0](LICENSE)
