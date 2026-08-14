@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a7](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a7) (2026-08-14)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a6...0.0.2a7)
+
+**Merged pull requests:**
+
+- feat: publish a docker image for a ready-to-run AimlBot persona [\#20](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/20) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.0.2a6](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a6) (2026-08-01)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a5...0.0.2a6)
