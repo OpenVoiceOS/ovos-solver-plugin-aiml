@@ -133,7 +133,7 @@ class TestAimlPersonaSpeaksThroughPipeline:
         messages = _drive_utterance(mc, sess, TEST_UTTERANCE, timeout=60)
 
         msg_types = [m.msg_type for m in messages]
-        speak_msgs = [m for m in messages if m.msg_type == "speak"]
+        speak_msgs = [m for m in messages if m.msg_type == "ovos.utterance.speak"]
 
         assert speak_msgs, (
             f"Expected at least one 'speak' message; got msg_types: {msg_types}"
@@ -162,7 +162,7 @@ class TestAimlPersonaSpeaksThroughPipeline:
         messages = _drive_utterance(mc, sess, "what is your name", timeout=60)
 
         for msg in messages:
-            if msg.msg_type == "speak":
+            if msg.msg_type == "ovos.utterance.speak":
                 assert msg.data.get("utterance", "").strip(), (
                     f"speak message has empty utterance: {msg.data}"
                 )
