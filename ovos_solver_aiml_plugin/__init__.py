@@ -18,6 +18,40 @@ class AimlBot:
     XDG_PATH = f"{xdg_data_home()}/aiml"
     makedirs(XDG_PATH, exist_ok=True)
 
+    # Bot identity predicates, overridable per-key via config["bot_<predicate>"].
+    # This plugin runs AIML, the pattern-matching language authored by Dr.
+    # Richard S. Wallace as the successor to ELIZA; the defaults name that
+    # lineage instead of Mycroft (this plugin is not Mycroft and OVOS does
+    # not carry Mycroft attribution/identity).
+    # https://en.wikipedia.org/wiki/Artificial_Intelligence_Markup_Language
+    # "botmaster" is the role word ("master") the corpus interpolates a name
+    # into (e.g. "My <botmaster> is <master>."), not a name itself - keep it
+    # as the role, and put the person in "master".
+    # "birthplace"/"location"/"city" are read by several categories (e.g.
+    # "WHERE ARE YOU FROM", "I am presently domiciled at <location>") and
+    # must not be left unset or those answers render with an empty hole;
+    # they describe the bot (which runs on the internet), not a guess about
+    # Wallace's whereabouts. "birthday" mirrors ALICE_BIRTH_YEAR below.
+    IDENTITY_DEFAULTS = {
+        "name": "A.L.I.C.E.",
+        "species": "AI",
+        "genus": "AIML",
+        "family": "Artificial Linguistic Internet Computer Entity",
+        "order": "artificial intelligence",
+        "class": "computer program",
+        "kingdom": "machine",
+        "phylum": "software",
+        "botmaster": "master",
+        "master": "Dr. Richard S. Wallace",
+        "birthplace": "the internet",
+        "location": "the internet",
+        "city": "the internet",
+        "birthday": "November 23, 1995",
+    }
+    # A.L.I.C.E. "came to life" on November 23, 1995.
+    # https://en.wikipedia.org/wiki/Artificial_Linguistic_Internet_Computer_Entity
+    ALICE_BIRTH_YEAR = 1995
+
     def __init__(self, lang="en-us", settings=None):
         self.settings = settings or {}
         self.lang = lang
@@ -55,18 +89,22 @@ class AimlBot:
                     self.kernel.learn(join(self.aiml_path, aiml_file))
             self.kernel.saveBrain(self.brain_path)
 
-        self.kernel.setBotPredicate("name", "Mycroft")
-        self.kernel.setBotPredicate("species", "AI")
-        self.kernel.setBotPredicate("genus", "Mycroft")
-        self.kernel.setBotPredicate("family", "virtual personal assistant")
-        self.kernel.setBotPredicate("order", "artificial intelligence")
-        self.kernel.setBotPredicate("class", "computer program")
-        self.kernel.setBotPredicate("kingdom", "machine")
-        self.kernel.setBotPredicate("hometown", "127.0.0.1")
-        self.kernel.setBotPredicate("botmaster", "master")
-        self.kernel.setBotPredicate("master", "the community")
-        # https://api.github.com/repos/MycroftAI/mycroft-core created_at date
-        self.kernel.setBotPredicate("age", str(date.today().year - 2016))
+        for predicate, default in self.IDENTITY_DEFAULTS.items():
+            # str(): PatternMgr.setBotName does `.split()` on the value, so a
+            # non-string config value (e.g. {"bot_name": 123}) would otherwise
+            # raise AttributeError deep inside the aiml library.
+            value = self.settings.get(f"bot_{predicate}", default)
+            self.kernel.setBotPredicate(predicate, str(value))
+        # "birth year" the age predicate is computed from; defaults to when
+        # A.L.I.C.E. came to life, not Mycroft's.
+        try:
+            birth_year = int(self.settings.get("bot_birth_year", self.ALICE_BIRTH_YEAR))
+        except (TypeError, ValueError) as e:
+            LOG.warning(f"Invalid bot_birth_year in config ({e}); "
+                        f"falling back to {self.ALICE_BIRTH_YEAR}")
+            birth_year = self.ALICE_BIRTH_YEAR
+        age = self.settings.get("bot_age", str(date.today().year - birth_year))
+        self.kernel.setBotPredicate("age", str(age))
 
         self.brain_loaded = True
         return
