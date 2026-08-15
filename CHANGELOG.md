@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a8](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a8) (2026-08-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a7...0.0.2a8)
+
+**Merged pull requests:**
+
+- fix: bot identity reflects the A.L.I.C.E./AIML lineage, not Mycroft [\#23](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/23) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.0.2a7](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a7) (2026-08-14)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a6...0.0.2a7)
