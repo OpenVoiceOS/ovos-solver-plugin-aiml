@@ -53,6 +53,27 @@ def test_non_english_query_translated_both_ways():
     assert reply.content.startswith("[en->pt]")
 
 
+def test_continue_chat_accepts_tools_kwarg_none():
+    """ChatEngine base contract: ``tools`` must be accepted (and ignored)
+    even though AIMLChatEngine is not tool-capable (pure pattern matching)."""
+    engine = AIMLChatEngine({"lang": "en-us"})
+    reply = engine.continue_chat(_user("hello"), lang="en-us", tools=None)
+    assert isinstance(reply, AgentMessage)
+    assert reply.role == MessageRole.ASSISTANT
+
+
+def test_continue_chat_accepts_tools_kwarg_list():
+    """Passing a non-empty ``tools`` list must not raise, since the base
+    ChatEngine.continue_chat wrapper may call subclasses with tools=."""
+    engine = AIMLChatEngine({"lang": "en-us"})
+    reply = engine.continue_chat(
+        _user("hello"), lang="en-us",
+        tools=[{"type": "function", "function": {"name": "noop"}}],
+    )
+    assert isinstance(reply, AgentMessage)
+    assert reply.role == MessageRole.ASSISTANT
+
+
 def test_missing_translator_degrades_gracefully():
     # enable_tx on, but no plugin available -> never raises, answers as-is
     engine = AIMLChatEngine({"lang": "en-us", "enable_tx": True})
