@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a9](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a9) (2026-08-31)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a8...0.0.2a9)
+
+**Merged pull requests:**
+
+- fix: e2e test asserts current speak topic, not legacy one [\#24](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/24) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.0.2a8](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a8) (2026-08-15)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a7...0.0.2a8)
