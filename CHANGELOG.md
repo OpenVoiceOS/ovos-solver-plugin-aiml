@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a10](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a10) (2026-08-31)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a9...0.0.2a10)
+
+**Merged pull requests:**
+
+- fix: AIMLChatEngine.continue\_chat must accept tools kwarg [\#19](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/19) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.0.2a9](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a9) (2026-08-31)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a8...0.0.2a9)
