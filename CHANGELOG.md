@@ -1,12 +1,88 @@
 # Changelog
 
-## [0.0.1a1](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.1a1) (2025-06-08)
+## [0.0.2a10](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a10) (2026-08-31)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.0...0.0.1a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a9...0.0.2a10)
 
 **Merged pull requests:**
 
-- fix: compatibility with ovos-plugin-manager 1.X.X [\#1](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/1) ([JarbasAl](https://github.com/JarbasAl))
+- fix: AIMLChatEngine.continue\_chat must accept tools kwarg [\#19](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/19) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.0.2a9](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a9) (2026-08-31)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a8...0.0.2a9)
+
+**Merged pull requests:**
+
+- fix: e2e test asserts current speak topic, not legacy one [\#24](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/24) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.0.2a8](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a8) (2026-08-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a7...0.0.2a8)
+
+**Merged pull requests:**
+
+- fix: bot identity reflects the A.L.I.C.E./AIML lineage, not Mycroft [\#23](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/23) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.0.2a7](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a7) (2026-08-14)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a6...0.0.2a7)
+
+**Merged pull requests:**
+
+- feat: publish a docker image for a ready-to-run AimlBot persona [\#20](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/20) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.0.2a6](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a6) (2026-08-01)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a5...0.0.2a6)
+
+**Merged pull requests:**
+
+- docs: rewrite README in Simplified Technical English [\#17](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/17) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.0.2a5](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a5) (2026-06-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a4...0.0.2a5)
+
+**Merged pull requests:**
+
+- test: full-pipeline persona e2e \(real local AIML\) [\#14](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/14) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.0.2a4](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a4) (2025-12-19)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a3...0.0.2a4)
+
+**Merged pull requests:**
+
+- chore\(deps\): update actions/setup-python action to v6 [\#11](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/11) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [0.0.2a3](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a3) (2025-12-19)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a2...0.0.2a3)
+
+**Merged pull requests:**
+
+- chore\(deps\): update dependency python to 3.14 [\#6](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/6) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [0.0.2a2](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a2) (2025-12-18)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a1...0.0.2a2)
+
+**Merged pull requests:**
+
+- chore: Configure Renovate [\#5](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/5) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [0.0.2a1](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a1) (2025-11-22)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/V0.0.1...0.0.2a1)
+
+**Merged pull requests:**
+
+- Update requirements.txt [\#3](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/3) ([JarbasAl](https://github.com/JarbasAl))
+
+## [V0.0.1](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/V0.0.1) (2025-06-08)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.1...V0.0.1)
 
 
 
