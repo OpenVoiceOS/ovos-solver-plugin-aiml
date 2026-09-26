@@ -1,4 +1,3 @@
-recursive-include LICENSE
-recursive-include README.md
-recursive-include requirements.txt
-recursive-include ovos_solver_aiml_plugin/aiml_data/*
+include LICENSE
+include README.md
+recursive-include ovos_solver_aiml_plugin/aiml_data *
