@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a11](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a11) (2026-09-26)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a10...0.0.2a11)
+
+**Merged pull requests:**
+
+- Update dependency pytest to v9 [\#16](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/16) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [0.0.2a10](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a10) (2026-08-31)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a9...0.0.2a10)
