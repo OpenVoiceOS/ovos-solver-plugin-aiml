@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a12](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a12) (2026-11-03)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a11...0.0.2a12)
+
+**Merged pull requests:**
+
+- fix\(ci\): run the conventional-label action directly [\#29](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/pull/29) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.0.2a11](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/tree/0.0.2a11) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-solver-plugin-aiml/compare/0.0.2a10...0.0.2a11)
