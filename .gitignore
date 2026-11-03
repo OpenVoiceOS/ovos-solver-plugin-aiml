@@ -1,5 +1,8 @@
 *.pyc
 __pycache__
+*.egg-info
+build/
+dist/
 ../fallback-aiml/.idea
 settings.json
 
